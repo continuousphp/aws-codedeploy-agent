@@ -19,41 +19,41 @@
 
 Chef::Log.info('Platform:' + node['platform'])
 
-case node["platform"]
+case node['platform']
 when 'ubuntu'
-  execute "apt-get-update-periodic" do
-    command "apt-get update"
+  execute 'apt-get-update-periodic' do
+    command 'apt-get update'
     ignore_failure true
     only_if do
-      File.exists?('/var/lib/apt/periodic/update-success-stamp') &&
+      File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
       File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
     end
   end
   %w(unzip rsync ruby).each do |pkg|
-    package pkg 
+    package pkg
   end
-when "fedora"
+when 'fedora'
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
-    package pkg 
+    package pkg
   end
-when "debian"
+when 'debian'
   %w(unzip rsync ruby tar).each do |pkg|
-    package pkg 
+    package pkg
   end
 else
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
-    package pkg 
+    package pkg
   end
 end
 
 include_recipe 'ohai'
 include_recipe 'build-essential'
-include_recipe "rbenv::default"
-include_recipe "rbenv::ruby_build"
+include_recipe 'rbenv::default'
+include_recipe 'rbenv::ruby_build'
 
 ark 'download-codedeploy' do
   url 'https://github.com/aws/aws-codedeploy-agent/archive/master.zip'
-  path '/opt' 
+  path '/opt'
   action :put
 end
 
@@ -69,7 +69,7 @@ file '/opt/codedeploy-agent/bin/codedeploy-agent' do
 end
 
 rbenv_ruby node['aws-codedeploy-agent']['ruby-version'] do
-  ruby_version node['aws-codedeploy-agent']['ruby-version'] 
+  ruby_version node['aws-codedeploy-agent']['ruby-version']
   global true
 end
 
@@ -91,6 +91,6 @@ link '/etc/codedeploy-agent/conf/codedeployagent.yml' do
 end
 
 service 'codedeploy-agent' do
-  provider Chef::Provider::Service::Init 
+  provider Chef::Provider::Service::Init
   action [:start]
 end
