@@ -1,0 +1,46 @@
+---
+driver:
+  name: ec2
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %> 
+  shared_credentials_profile: <%= ENV['AWS_PROFILE'] %>
+  security_group_ids: ["sg-0000000"]
+  region: us-east-1
+  availability_zone: e
+  require_chef_omnibus: true
+  subnet_id: subnet-00000000
+  instance_type: m3.medium
+  associate_public_ip: true
+  interface: dns
+
+transport:
+  ssh_key: ~/.ssh/aws-codedeploy-agent-cookbook.pem
+  connection_timeout: 10
+  connection_retries: 5
+  username: ubuntu
+
+platforms:
+  - name: ubuntu-14.04
+    driver:
+      image_id: ami-d05e75b8 
+      block_device_mappings:
+        - ebs_device_name: /dev/sda1
+          ebs_volume_type: gp2 
+          ebs_virtual_name: test
+          ebs_volume_size: 8 
+          ebs_delete_on_termination: true
+  - name: amazon-linux 
+    driver:
+      image_id: ami-1ecae776 
+      block_device_mappings:
+        - ebs_device_name: /dev/sdb
+          ebs_volume_type: gp2
+          ebs_virtual_name: test
+          ebs_volume_size: 8
+          ebs_delete_on_termination: true
+    transport:
+          username: ec2-user 
+suites:
+  - name: aws-codedeploy-agent
+    run_list:
+      - recipe[aws-codedeploy-agent]
+    attributes:

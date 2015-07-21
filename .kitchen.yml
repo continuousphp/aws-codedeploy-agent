@@ -1,0 +1,27 @@
+---
+driver:
+  name: docker
+  port: 2222
+
+provisioner:
+  name: chef_solo
+
+platforms:
+  - name: ubuntu-14.04 
+    driver_config:
+      image: ubuntu:14.04 
+  - name: fedora-21 
+    driver_config:
+      image: fedora:21 
+  - name: centos-7 
+    driver_config:
+      image: centos:7 
+  - name: debian-8 
+    driver_config:
+      image: debian:8 
+
+suites:
+  - name: aws-codedeploy-agent 
+    run_list:
+      - recipe[aws-codedeploy-agent]
+    attributes:
