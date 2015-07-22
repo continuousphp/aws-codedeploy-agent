@@ -9,6 +9,7 @@ driver:
   require_chef_omnibus: true
   subnet_id: subnet-00000000
   instance_type: m3.medium
+  iam_profile_name: CodeDeployGitHubDemo
   associate_public_ip: true
   interface: dns
 

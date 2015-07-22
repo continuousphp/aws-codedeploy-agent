@@ -58,7 +58,7 @@ ark 'download-codedeploy' do
 end
 
 link '/opt/codedeploy-agent' do
-  to '/opt/download-codedeploy/aws-codedeploy-agent-master'
+  to '/opt/download-codedeploy'
   not_if 'test -f /opt/codedeploy-agent'
 end
 
@@ -81,9 +81,11 @@ link '/etc/init.d/codedeploy-agent' do
   to '/opt/codedeploy-agent/init.d/codedeploy-agent'
 end
 
-directory '/etc/codedeploy-agent/conf' do
-  action :create
-  recursive true
+%w(/opt/codedeploy-agent/deployment-root /etc/codedeploy-agent/conf).each do |dir|
+  directory dir do
+    action :create
+    recursive true
+  end
 end
 
 link '/etc/codedeploy-agent/conf/codedeployagent.yml' do

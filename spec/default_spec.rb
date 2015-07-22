@@ -38,6 +38,11 @@ describe 'aws-codedeploy-agent::default' do
     expect(chef_run).to create_directory('/etc/codedeploy-agent/conf')
   end
 
+  it 'creates the deployment root directory' do
+    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    expect(chef_run).to create_directory('/opt/codedeploy-agent/deployment-root')
+  end
+
   it 'creates the codedeploy agent conf link' do
     stub_command("test -f /opt/codedeploy-agent").and_return(true)
     expect(chef_run).to create_link('/etc/codedeploy-agent/conf/codedeployagent.yml')
