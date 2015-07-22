@@ -6,9 +6,9 @@ description      'Installs/Configures aws-codedeploy-agent'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.2.0'
 
-supports 'ubuntu', '= 14.02'
-supports 'centos', '= 7'
-supports 'fedora', '= 21'
+supports 'ubuntu'
+supports 'centos'
+supports 'fedora'
 
 depends 'ohai'
 depends 'build-essential'
