@@ -8,7 +8,7 @@ driver:
   availability_zone: e
   require_chef_omnibus: true
   subnet_id: subnet-00000000
-  instance_type: m3.medium
+  iam_profile_name: CodeDeploy
   iam_profile_name: CodeDeployGitHubDemo
   associate_public_ip: true
   interface: dns
@@ -20,9 +20,10 @@ transport:
   username: ubuntu
 
 platforms:
-  - name: ubuntu-14.04
+  - name: ubuntu-14.04-aws
     driver:
       image_id: ami-d05e75b8 
+      instance_type: m3.medium
       block_device_mappings:
         - ebs_device_name: /dev/sda1
           ebs_volume_type: gp2 
@@ -32,6 +33,7 @@ platforms:
   - name: amazon-linux 
     driver:
       image_id: ami-1ecae776 
+      instance_type: t2.micro
       block_device_mappings:
         - ebs_device_name: /dev/sdb
           ebs_volume_type: gp2
