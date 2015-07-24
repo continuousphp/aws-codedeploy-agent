@@ -41,7 +41,7 @@ when 'ubuntu'
     %w(unzip rsync ruby).each do |pkg|
       package pkg
     end
-    ubuntu_12_04_installer 
+    ubuntu_12_04_installer
   end
 
 when 'fedora'
@@ -61,7 +61,7 @@ when 'debian'
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
-  ubuntu_12_04_installer 
+  ubuntu_12_04_installer
 when 'amazon'
   %w(ruby aws-cli).each do |pkg|
     package pkg

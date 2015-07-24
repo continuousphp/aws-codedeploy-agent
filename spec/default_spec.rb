@@ -9,10 +9,10 @@ describe 'aws-codedeploy-agent::default' do
   @dummy_config = Tempfile.new 'chef-config'
   Chef::Config[:config_file] = @dummy_config.path
 
-  it 'creates the codedeploy-agent link' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
-    expect(chef_run).to create_link('/opt/codedeploy-agent')
-  end
+  #it 'creates the codedeploy-agent link' do
+  #  stub_command("test -f /opt/codedeploy-agent").and_return(true)
+  #  expect(chef_run).to create_link('/opt/codedeploy-agent')
+  #end
 
   it 'set the codedeploy-agent permissions' do
     stub_command("test -f /opt/codedeploy-agent").and_return(true)
@@ -38,7 +38,7 @@ describe 'aws-codedeploy-agent::default' do
     expect(chef_run).to create_directory('/etc/codedeploy-agent/conf')
   end
 
-  it 'creates the deployment root directory' do
+  it 'creates the deployment root directory' do                                                                                                                                                                                               
     stub_command("test -f /opt/codedeploy-agent").and_return(true)
     expect(chef_run).to create_directory('/opt/codedeploy-agent/deployment-root')
   end
