@@ -28,6 +28,17 @@ define :manual_installer do
     global true
   end
 
+  %w(simple_pid gli logging zip).each do |gem|
+    rbenv_gem gem do
+      ruby_version node['aws-codedeploy-agent']['ruby-version']
+    end
+  end
+
+  rbenv_gem 'aws-sdk-core' do
+    ruby_version node['aws-codedeploy-agent']['ruby-version']
+    version '2.1.2'
+  end
+
   link '/usr/bin/ruby2.0' do
     to '/opt/rbenv/versions/2.0.0-p645/bin/ruby'
   end

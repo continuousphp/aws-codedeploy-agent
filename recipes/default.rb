@@ -25,10 +25,6 @@ when 'ubuntu'
   execute 'apt-get-update-periodic' do
     command 'apt-get update'
     ignore_failure true
-    only_if do
-      File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
-      File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
-    end
   end
 
   case node['platform_version']
@@ -41,7 +37,7 @@ when 'ubuntu'
     %w(unzip rsync ruby).each do |pkg|
       package pkg
     end
-    ubuntu_12_04_installer
+    manual_installer
   end
 
 when 'fedora'
@@ -49,19 +45,23 @@ when 'fedora'
     package pkg
   end
   manual_installer
+
+when 'centos'
+  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
+    package pkg
+  end
+  manual_installer
+
 when 'debian'
   execute 'apt-get-update-periodic' do
     command 'apt-get update'
     ignore_failure true
-    only_if do
-      File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
-      File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
-    end
   end
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
-  ubuntu_12_04_installer
+  manual_installer
+
 when 'amazon'
   %w(ruby aws-cli).each do |pkg|
     package pkg
