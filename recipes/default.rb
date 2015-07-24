@@ -17,7 +17,8 @@
 # limitations under the License.
 #
 
-Chef::Log.info('Platform:' + node['platform'])
+Chef::Log.debug('Platform:' + node['platform'])
+Chef::Log.debug('Platform:' + node['platform_version'])
 
 case node['platform']
 when 'ubuntu'
@@ -29,20 +30,38 @@ when 'ubuntu'
       File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
     end
   end
-  %w(unzip rsync ruby).each do |pkg|
-    package pkg
+
+  case node['platform_version']
+  when '14.04'
+    %w(unzip rsync ruby2.0).each do |pkg|
+      package pkg
+    end
+    ubuntu_installer
+  when '12.04'
+    %w(unzip rsync ruby).each do |pkg|
+      package pkg
+    end
+    ubuntu_12_04_installer 
   end
-  manual_installer
+
 when 'fedora'
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
     package pkg
   end
   manual_installer
 when 'debian'
+  execute 'apt-get-update-periodic' do
+    command 'apt-get update'
+    ignore_failure true
+    only_if do
+      File.exist?('/var/lib/apt/periodic/update-success-stamp') &&
+      File.mtime('/var/lib/apt/periodic/update-success-stamp') < Time.now - 86400
+    end
+  end
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
-  manual_installer
+  ubuntu_12_04_installer 
 when 'amazon'
   %w(ruby aws-cli).each do |pkg|
     package pkg

@@ -1,4 +1,5 @@
-define :manual_installer do
+# ~FC015
+define :ubuntu_12_04_installer do
   include_recipe 'ohai'
   include_recipe 'build-essential'
   include_recipe 'rbenv::default'
@@ -16,11 +17,6 @@ define :manual_installer do
     not_if 'test -f /opt/codedeploy-agent'
   end
   
-  # link '/opt/codedeploy-agent' do
-  #  to '/opt/download-codedeploy/aws-codedeploy-agent-master'
-  #  not_if 'test -f /opt/codedeploy-agent'
-  #end
-  
   file '/opt/codedeploy-agent/bin/codedeploy-agent' do
     mode '0755'
     owner 'root'
@@ -32,6 +28,17 @@ define :manual_installer do
     global true
   end
   
+  %w(simple_pid gli logging zip).each do |gem|
+    rbenv_gem gem do
+      ruby_version node['aws-codedeploy-agent']['ruby-version'] 
+    end
+  end
+
+  rbenv_gem 'aws-sdk-core' do
+    ruby_version node['aws-codedeploy-agent']['ruby-version'] 
+    version '2.1.2'
+  end
+
   link '/usr/bin/ruby2.0' do
     to '/opt/rbenv/versions/2.0.0-p645/bin/ruby'
   end
@@ -52,7 +59,6 @@ define :manual_installer do
   end
   
   service 'codedeploy-agent' do
-    provider Chef::Provider::Service::Init
     action [:start]
   end
 end

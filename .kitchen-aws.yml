@@ -30,6 +30,26 @@ platforms:
           ebs_virtual_name: test
           ebs_volume_size: 8 
           ebs_delete_on_termination: true
+  - name: ubuntu-12.04-aws
+    driver:
+      image_id: ami-81fb34ea
+      block_device_mappings:
+        - ebs_device_name: /dev/sda1
+          ebs_volume_type: gp2
+          ebs_virtual_name: test
+          ebs_volume_size: 8
+          ebs_delete_on_termination: true
+  - name: debian-8-aws
+    driver:
+      image_id: ami-8b9a63e0
+      block_device_mappings:
+        - ebs_device_name: /dev/xvda
+          ebs_volume_type: gp2
+          ebs_virtual_name: test
+          ebs_volume_size: 8
+          ebs_delete_on_termination: true
+    transport:
+          username: admin
   - name: amazon-linux 
     driver:
       image_id: ami-1ecae776 

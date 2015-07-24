@@ -11,6 +11,7 @@ The following platforms are supported by this cookbook.
 * Ubuntu 14.04
 * CentOs 7 
 * Fedora 21
+* Debian 8 
 * Amazon Linux AMI 2015.03
 
 #### packages
