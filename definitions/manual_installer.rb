@@ -7,7 +7,7 @@ define :manual_installer do
   include_recipe 'awscli'
 
   ark 'download-codedeploy' do
-    url 'https://github.com/aws/aws-codedeploy-agent/archive/master.zip'
+    url node['aws-codedeploy-agent']['git-archive']
     path '/opt'
     action :put
   end
@@ -36,7 +36,7 @@ define :manual_installer do
 
   rbenv_gem 'aws-sdk-core' do
     ruby_version node['aws-codedeploy-agent']['ruby-version']
-    version '2.1.2'
+    version node['aws-codedeploy-agent']['aws-sdk-version']
   end
 
   link '/usr/bin/ruby2.0' do
