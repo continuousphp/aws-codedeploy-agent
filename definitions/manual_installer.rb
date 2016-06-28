@@ -59,7 +59,6 @@ define :manual_installer do
   end
 
   service 'codedeploy-agent' do
-    provider Chef::Provider::Service::Init
     action [:enable, :start]
   end
 end
