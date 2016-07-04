@@ -4,7 +4,7 @@ define :manual_installer do
   include_recipe 'build-essential'
   include_recipe 'rbenv::default'
   include_recipe 'rbenv::ruby_build'
-  include_recipe 'awscli'
+  include_recipe 'cloudcli'
 
   ark 'download-codedeploy' do
     url 'https://github.com/aws/aws-codedeploy-agent/archive/master.zip'

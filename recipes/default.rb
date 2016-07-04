@@ -28,6 +28,11 @@ when 'ubuntu'
   end
 
   case node['platform_version']
+  when '16.04'
+    %w(unzip rsync ruby2.3).each do |pkg|
+      package pkg
+    end
+    manual_installer
   when '14.04'
     %w(unzip rsync ruby2.0).each do |pkg|
       package pkg
