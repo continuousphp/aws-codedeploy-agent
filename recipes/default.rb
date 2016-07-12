@@ -52,10 +52,10 @@ when 'fedora'
   manual_installer
 
 when 'centos'
-  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
+  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel bzip2).each do |pkg|
     package pkg
   end
-  manual_installer
+  rhel_installer
 
 when 'debian'
   execute 'apt-get-update-periodic' do
