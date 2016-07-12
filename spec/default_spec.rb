@@ -15,7 +15,7 @@ describe 'aws-codedeploy-agent::default' do
   #end
 
   it 'set the codedeploy-agent permissions' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_file('/opt/codedeploy-agent/bin/codedeploy-agent').with(
       user:   'root',
       group:  'root',
@@ -24,32 +24,32 @@ describe 'aws-codedeploy-agent::default' do
   end
 
   it 'creates the ruby2.0 link' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_link('/usr/bin/ruby2.0')
   end
 
   it 'creates the init.d codedeploy-agent link' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_link('/etc/init.d/codedeploy-agent')
   end
 
   it 'creates the codedeploy-agent conf directory' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_directory('/etc/codedeploy-agent/conf')
   end
 
-  it 'creates the deployment root directory' do                                                                                                                                                                                               
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+  it 'creates the deployment root directory' do
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_directory('/opt/codedeploy-agent/deployment-root')
   end
 
   it 'creates the codedeploy agent conf link' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to create_link('/etc/codedeploy-agent/conf/codedeployagent.yml')
   end
 
   it 'starts the codedeploy-agent service' do
-    stub_command("test -f /opt/codedeploy-agent").and_return(true)
+    stub_command('test -f /opt/codedeploy-agent').and_return(true)
     expect(chef_run).to start_service('codedeploy-agent')
   end
 end
