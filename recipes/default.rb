@@ -32,30 +32,41 @@ when 'ubuntu'
     %w(unzip rsync ruby2.3).each do |pkg|
       package pkg
     end
-    manual_installer
+    download_installer
   when '14.04'
     %w(unzip rsync ruby2.0).each do |pkg|
       package pkg
     end
-    ubuntu_installer
+    download_installer
   when '12.04'
     %w(unzip rsync ruby).each do |pkg|
       package pkg
     end
-    manual_installer
+    download_installer
+  end
+  service 'codedeploy-agent' do
+    action [:enable, :start]
   end
 
 when 'fedora'
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
     package pkg
   end
-  manual_installer
+  download_installer
+  service 'codedeploy-agent' do
+    action [:start]
+    provider Chef::Provider::Service::Init
+  end
 
 when 'centos'
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel bzip2).each do |pkg|
     package pkg
   end
-  rhel_installer
+  manual_installer
+  service 'codedeploy-agent' do
+    action [:start]
+    provider Chef::Provider::Service::Init
+  end
 
 when 'debian'
   execute 'apt-get-update-periodic' do
@@ -65,7 +76,7 @@ when 'debian'
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
-  manual_installer
+  download_installer
 
 when 'amazon'
   %w(ruby aws-cli).each do |pkg|
@@ -77,4 +88,7 @@ else
     package pkg
   end
   manual_installer
+  service 'codedeploy-agent' do
+    action [:start]
+  end
 end

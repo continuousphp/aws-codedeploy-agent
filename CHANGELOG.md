@@ -3,6 +3,10 @@ aws-codedeploy-agent CHANGELOG
 
 This file is used to list changes made in each version of the aws-codedeploy-agent cookbook.
 
+0.6.0
+-----
+- Oswald De Riemaecker - Swithing to ruby_rbenv with rvm_download plugin to add a download installer to install ruby faster (except for centos)
+
 0.4.0
 -----
 - Oswald De Riemaecker - Added Ubuntu 12.04 and Debian 8 Support

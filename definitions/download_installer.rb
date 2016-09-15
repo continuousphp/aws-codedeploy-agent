@@ -1,5 +1,5 @@
 # ~FC015
-define :manual_installer do
+define :download_installer do
   include_recipe 'ohai'
   include_recipe 'build-essential'
   include_recipe 'ruby_rbenv::system'
@@ -23,8 +23,13 @@ define :manual_installer do
     group 'root'
   end
 
+  rbenv_plugin 'rbenv-download' do
+    git_url 'https://github.com/garnieretienne/rvm-download.git'
+  end
+
   rbenv_ruby node['aws-codedeploy-agent']['rbenv_ruby-version'] do
-    action :install
+    #action :install
+    rbenv_action 'download'
   end
 
   rbenv_global node['aws-codedeploy-agent']['rbenv_ruby-version']
@@ -59,7 +64,4 @@ define :manual_installer do
     to '/opt/codedeploy-agent/conf/codedeployagent.yml'
   end
 
-  #service 'codedeploy-agent' do
-  #  action [:enable, :start]
-  #end
 end
