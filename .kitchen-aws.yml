@@ -1,67 +1,51 @@
 ---
 driver:
   name: ec2
-  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %> 
-  shared_credentials_profile: <%= ENV['AWS_PROFILE'] %>
-  security_group_ids: ["sg-0000000"]
   region: us-east-1
-  availability_zone: e
   require_chef_omnibus: true
-  subnet_id: subnet-00000000
-  iam_profile_name: CodeDeploy
-  iam_profile_name: CodeDeployGitHubDemo
   associate_public_ip: true
+  aws_ssh_key_id: key-pairs
+  security_group_ids: ["sg-000000"]
   interface: dns
 
 transport:
-  ssh_key: ~/.ssh/aws-codedeploy-agent-cookbook.pem
+  ssh_key: ~/.ssh/key-pairs.pem
   connection_timeout: 10
   connection_retries: 5
   username: ubuntu
 
 platforms:
+  - name: ubuntu-16.04-aws
+    driver:
+      image_id: ami-c45b54ae
+      instance_type: t2.micro
   - name: ubuntu-14.04-aws
     driver:
-      image_id: ami-d05e75b8 
-      instance_type: m3.medium
-      block_device_mappings:
-        - ebs_device_name: /dev/sda1
-          ebs_volume_type: gp2 
-          ebs_virtual_name: test
-          ebs_volume_size: 8 
-          ebs_delete_on_termination: true
+      image_id: ami-d05e75b8
+      instance_type: t2.micro
   - name: ubuntu-12.04-aws
     driver:
       image_id: ami-81fb34ea
-      block_device_mappings:
-        - ebs_device_name: /dev/sda1
-          ebs_volume_type: gp2
-          ebs_virtual_name: test
-          ebs_volume_size: 8
-          ebs_delete_on_termination: true
+      instance_type: t2.micro
   - name: debian-8-aws
     driver:
-      image_id: ami-8b9a63e0
-      block_device_mappings:
-        - ebs_device_name: /dev/xvda
-          ebs_volume_type: gp2
-          ebs_virtual_name: test
-          ebs_volume_size: 8
-          ebs_delete_on_termination: true
+      image_id: ami-8e9ca3e4
+      instance_type: t2.micro
     transport:
           username: admin
-  - name: amazon-linux 
+  - name: centos-7-aws
     driver:
-      image_id: ami-1ecae776 
+      image_id: ami-6d1c2007
       instance_type: t2.micro
-      block_device_mappings:
-        - ebs_device_name: /dev/sdb
-          ebs_volume_type: gp2
-          ebs_virtual_name: test
-          ebs_volume_size: 8
-          ebs_delete_on_termination: true
     transport:
-          username: ec2-user 
+          username: centos
+  - name: amazon-linux
+    driver:
+      image_id: ami-1ecae776
+      instance_type: t2.micro
+    transport:
+          username: ec2-user
+
 suites:
   - name: aws-codedeploy-agent
     run_list:

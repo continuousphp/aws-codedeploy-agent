@@ -59,13 +59,13 @@ when 'fedora'
   end
 
 when 'centos'
-  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel bzip2).each do |pkg|
+  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel bzip2 initscripts).each do |pkg|
     package pkg
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:start]
-    provider Chef::Provider::Service::Init
+    action [:enable,:start]
+    Chef::Provider::Service::Upstart
   end
 
 when 'debian'
@@ -77,18 +77,25 @@ when 'debian'
     package pkg
   end
   download_installer
+  service 'codedeploy-agent' do
+    action [:enable,:start]
+  end
 
 when 'amazon'
   %w(ruby aws-cli).each do |pkg|
     package pkg
   end
   amazon_installer
+  service 'codedeploy-agent' do
+    action [:start]
+    provider Chef::Provider::Service::Init
+  end
 else
   %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
     package pkg
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:start]
+    action [:enable,:start]
   end
 end
