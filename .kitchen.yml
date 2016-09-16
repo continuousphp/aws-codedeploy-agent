@@ -21,6 +21,9 @@ platforms:
       image: fedora:21 
   - name: centos-7 
     driver_config:
+      privileged: true
+      run_command: /usr/sbin/init
+      use_sudo: false
       image: centos:7 
   - name: debian-8 
     driver_config:
