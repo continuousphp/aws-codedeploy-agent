@@ -49,13 +49,13 @@ when 'ubuntu'
   end
 
 when 'fedora'
-  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel).each do |pkg|
+  %w(unzip rsync ruby tar openssl-devel readline-devel zlib-devel initscripts).each do |pkg|
     package pkg
   end
   download_installer
   service 'codedeploy-agent' do
-    action [:start]
-    provider Chef::Provider::Service::Init
+    action [:enable,:start]
+    #provider Chef::Provider::Service::Init
   end
 
 when 'centos'
