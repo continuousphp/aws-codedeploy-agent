@@ -68,6 +68,11 @@ KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ce
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-amazon-linux
 ```
 
+To test all at once:
+```bash
+AWS_PROFILE=continuousphp-ami KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify -c 5
+```
+
 Refer to the [kitchen-ec2](https://github.com/test-kitchen/kitchen-ec2) documentation
 
 Contributing
