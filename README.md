@@ -8,7 +8,7 @@ Requirements
 ------------
 The following platforms are supported by this cookbook.
 
-* Ubuntu 14.04
+* Ubuntu 12.04/14.04/16.04
 * CentOs 7 
 * Fedora 21
 * Debian 8 
