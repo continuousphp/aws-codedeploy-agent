@@ -22,6 +22,7 @@ Attributes
 Customize the attributes to set ruby version requirements of AWS aws-codedeploy-agent (currently 2.0.0-p645) 
 
 #### aws-codedeploy-agent::default
+
 <table>
   <tr>
     <th>Key</th>
@@ -66,6 +67,7 @@ kitchen verify aws-codedeploy-agent-ubuntu-1604
 ``` 
 
 To test the cookbook on AWS instances use:
+
 ```bash
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen list 
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1604-aws
@@ -77,6 +79,7 @@ KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-am
 ```
 
 To test all at once:
+
 ```bash
 AWS_PROFILE=continuousphp-ami KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify -c 5
 ```
