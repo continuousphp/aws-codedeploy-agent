@@ -57,6 +57,14 @@ Testing
 -------
 Default .kitchen.yml test the cookbook in docker containers.
 
+To test locally:
+
+```bash
+kitchen list
+kitchen converge aws-codedeploy-agent-ubuntu-1604
+kitchen verify aws-codedeploy-agent-ubuntu-1604
+``` 
+
 To test the cookbook on AWS instances use:
 ```bash
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen list 
