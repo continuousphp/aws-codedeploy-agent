@@ -30,12 +30,13 @@ Customize the attributes to set ruby version requirements of AWS aws-codedeploy-
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>node['aws-codedeploy-agent']['ruby-version']</tt></td>
+    <td><tt>node['aws-codedeploy-agent']['rbenv_ruby-version']</tt></td>
     <td>string</td>
     <td>Set the default ruby version of code deploy</td>
-    <td><tt>2.0.0-p645</tt></td>
+    <td><tt>2.1.5</tt></td>
   </tr>
 </table>
+
 
 Usage
 -----
@@ -59,9 +60,11 @@ Default .kitchen.yml test the cookbook in docker containers.
 To test the cookbook on AWS instances use:
 ```bash
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen list 
+KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1604-aws
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1404-aws
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1204-aws 
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-debian-8-aws 
+KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-centos-7-aws 
 KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-amazon-linux
 ```
 
