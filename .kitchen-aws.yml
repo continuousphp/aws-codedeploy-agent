@@ -17,7 +17,7 @@ transport:
 platforms:
   - name: ubuntu-16.04-aws
     driver:
-      image_id: ami-c45b54ae
+      image_id: ami-2ef48339
       instance_type: t2.micro
   - name: ubuntu-14.04-aws
     driver:
