@@ -68,20 +68,28 @@ kitchen verify aws-codedeploy-agent-ubuntu-1604
 
 To test the cookbook on AWS instances use:
 
+Configure the access to your AWS account using the AWS CLI:
 ```bash
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen list 
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1604-aws
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1404-aws
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1204-aws 
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-debian-8-aws 
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-centos-7-aws 
-KITCHEN_YAML=.kitchen-aws.yml bundle exec kitchen verify aws-codedeploy-agent-amazon-linux
+aws configure --profile=AWS_CLI_PROFILE
+```
+
+copy the .kitchen-aws.yml to .kitchen-aws.local.yml and configure to suite your AWS account.
+
+```bash
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen list 
+
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1604-aws
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1404-aws
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-ubuntu-1204-aws 
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-debian-8-aws 
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-centos-7-aws 
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify aws-codedeploy-agent-amazon-linux
 ```
 
 To test all at once:
 
 ```bash
-AWS_PROFILE=continuousphp-ami KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify -c 5
+AWS_PROFILE=AWS_CLI_PROFILE KITCHEN_YAML=.kitchen-aws.local.yml bundle exec kitchen verify -c 5
 ```
 
 Refer to the [kitchen-ec2](https://github.com/test-kitchen/kitchen-ec2) documentation
