@@ -7,7 +7,7 @@ define :download_installer do
   include_recipe 'cloudcli'
 
   ark 'download-codedeploy' do
-    url 'https://github.com/aws/aws-codedeploy-agent/archive/master.zip'
+    url "https://github.com/aws/aws-codedeploy-agent/archive/#{node['aws-codedeploy-agent']['aws_codedeploy_agent-version']}.zip"
     path '/opt'
     action :put
   end
