@@ -37,7 +37,7 @@ define :manual_installer do
 
   rbenv_gem 'aws-sdk-core' do
     rbenv_version node['aws-codedeploy-agent']['rbenv_ruby-version']
-    version '2.3.17'
+    version node['aws-codedeploy-agent']['aws_sdk_core-version']
   end
 
   link '/usr/bin/ruby2.0' do
