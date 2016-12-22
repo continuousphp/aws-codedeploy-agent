@@ -19,7 +19,7 @@ The following platforms are supported by this cookbook.
 
 Attributes
 ----------
-Customize the attributes to set ruby version requirements of AWS aws-codedeploy-agent (currently 2.0.0-p645) 
+Customize the version of aws-codedeploy-agent to be installed and the version of the ruby and aws-sdk-core dependencies
 
 #### aws-codedeploy-agent::default
 
@@ -35,6 +35,18 @@ Customize the attributes to set ruby version requirements of AWS aws-codedeploy-
     <td>string</td>
     <td>Set the default ruby version of code deploy</td>
     <td><tt>2.1.5</tt></td>
+  </tr>
+  <tr>
+    <td><tt>node['aws-codedeploy-agent']['aws_sdk_core-version']</tt></td>
+    <td>string</td>
+    <td>Set the version of aws-sdk-core gem. See <a href="https://rubygems.org/gems/aws-sdk-core/versions/2.3.17">rubygems for alternate release versions.</a></td>
+    <td><tt>2.6.11</tt></td>
+  </tr>
+  <tr>
+    <td><tt>node['aws-codedeploy-agent']['aws_codedeploy_agent-version']</tt></td>
+    <td>string</td>
+    <td>Set the version of the code deploy agent to be installed. Tracks master, other options include &quot;v1.0-1011&quot; or see <a href="https://github.com/aws/aws-codedeploy-agent/releases">the release archive for available, tagged versions</a> </td>
+    <td><tt>master</tt></td>
   </tr>
 </table>
 
