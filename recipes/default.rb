@@ -54,7 +54,7 @@ when 'fedora'
   end
   download_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
     #provider Chef::Provider::Service::Init
   end
 
@@ -64,7 +64,7 @@ when 'centos'
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
     Chef::Provider::Service::Upstart
   end
 
@@ -78,7 +78,7 @@ when 'debian'
   end
   download_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
   end
 
 when 'amazon'
@@ -96,6 +96,6 @@ else
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
   end
 end
