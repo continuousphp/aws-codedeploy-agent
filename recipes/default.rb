@@ -20,13 +20,10 @@
 Chef::Log.debug('Platform:' + node['platform'])
 Chef::Log.debug('Platform:' + node['platform_version'])
 
+apt_update
+
 case node['platform']
 when 'ubuntu'
-  execute 'apt-get-update-periodic' do
-    command 'apt-get update'
-    ignore_failure true
-  end
-
   case node['platform_version']
   when '16.04'
     %w(unzip rsync ruby2.3).each do |pkg|
@@ -69,10 +66,6 @@ when 'centos'
   end
 
 when 'debian'
-  execute 'apt-get-update-periodic' do
-    command 'apt-get update'
-    ignore_failure true
-  end
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
