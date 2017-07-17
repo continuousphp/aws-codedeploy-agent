@@ -1,6 +1,5 @@
 # ~FC015
 define :download_installer do
-  include_recipe 'ohai'
   include_recipe 'build-essential'
   include_recipe 'ruby_rbenv::system'
   include_recipe 'ruby_build'
@@ -28,7 +27,7 @@ define :download_installer do
   end
 
   rbenv_ruby node['aws-codedeploy-agent']['rbenv_ruby-version'] do
-    #action :install
+    # action :install
     rbenv_action 'download'
   end
 
@@ -63,5 +62,4 @@ define :download_installer do
   link '/etc/codedeploy-agent/conf/codedeployagent.yml' do
     to '/opt/codedeploy-agent/conf/codedeployagent.yml'
   end
-
 end

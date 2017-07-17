@@ -1,5 +1,4 @@
 define :ubuntu_installer do
-
   include_recipe 'cloudcli'
 
   remote_file "#{Chef::Config[:file_cache_path]}/codedeploy-agent_all.deb" do

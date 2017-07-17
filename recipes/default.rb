@@ -20,13 +20,10 @@
 Chef::Log.debug('Platform:' + node['platform'])
 Chef::Log.debug('Platform:' + node['platform_version'])
 
+apt_update
+
 case node['platform']
 when 'ubuntu'
-  execute 'apt-get-update-periodic' do
-    command 'apt-get update'
-    ignore_failure true
-  end
-
   case node['platform_version']
   when '16.04'
     %w(unzip rsync ruby2.3).each do |pkg|
@@ -54,8 +51,8 @@ when 'fedora'
   end
   download_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
-    #provider Chef::Provider::Service::Init
+    action [:enable, :start]
+    # provider Chef::Provider::Service::Init
   end
 
 when 'centos'
@@ -64,21 +61,16 @@ when 'centos'
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
-    Chef::Provider::Service::Upstart
+    action [:enable, :start]
   end
 
 when 'debian'
-  execute 'apt-get-update-periodic' do
-    command 'apt-get update'
-    ignore_failure true
-  end
   %w(unzip rsync ruby tar).each do |pkg|
     package pkg
   end
   download_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
   end
 
 when 'amazon'
@@ -96,6 +88,6 @@ else
   end
   manual_installer
   service 'codedeploy-agent' do
-    action [:enable,:start]
+    action [:enable, :start]
   end
 end
