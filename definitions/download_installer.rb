@@ -1,6 +1,5 @@
 # ~FC015
 define :download_installer do
-  include_recipe 'ohai'
   include_recipe 'build-essential'
   include_recipe 'ruby_rbenv::system'
   include_recipe 'ruby_build'
