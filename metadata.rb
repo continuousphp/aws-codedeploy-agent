@@ -3,7 +3,7 @@ maintainer       'Oswald De Riemaecker'
 maintainer_email 'oswald@continuousphp.com'
 source_url       'https://github.com/continuousphp/aws-codedeploy-agent'
 issues_url       'https://github.com/continuousphp/aws-codedeploy-agent/issues'
-license          'Apache 2.0'
+license          'Apache-2.0'
 description      'Installs/Configures aws-codedeploy-agent'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.7.1'
