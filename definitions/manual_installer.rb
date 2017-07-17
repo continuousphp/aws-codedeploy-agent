@@ -59,7 +59,7 @@ define :manual_installer do
     to '/opt/codedeploy-agent/conf/codedeployagent.yml'
   end
 
-  #service 'codedeploy-agent' do
-  #  action [:enable, :start]
-  #end
+  # service 'codedeploy-agent' do
+  #   action [:enable, :start]
+  # end
 end

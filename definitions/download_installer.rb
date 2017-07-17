@@ -28,7 +28,7 @@ define :download_installer do
   end
 
   rbenv_ruby node['aws-codedeploy-agent']['rbenv_ruby-version'] do
-    #action :install
+    # action :install
     rbenv_action 'download'
   end
 
