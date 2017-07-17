@@ -52,7 +52,7 @@ when 'fedora'
   download_installer
   service 'codedeploy-agent' do
     action [:enable, :start]
-    #provider Chef::Provider::Service::Init
+    # provider Chef::Provider::Service::Init
   end
 
 when 'centos'

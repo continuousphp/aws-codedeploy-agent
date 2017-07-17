@@ -63,5 +63,4 @@ define :download_installer do
   link '/etc/codedeploy-agent/conf/codedeployagent.yml' do
     to '/opt/codedeploy-agent/conf/codedeployagent.yml'
   end
-
 end
