@@ -62,7 +62,6 @@ when 'centos'
   manual_installer
   service 'codedeploy-agent' do
     action [:enable, :start]
-    Chef::Provider::Service::Upstart
   end
 
 when 'debian'
