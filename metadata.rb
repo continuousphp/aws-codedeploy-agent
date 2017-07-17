@@ -12,6 +12,7 @@ supports 'ubuntu'
 supports 'centos'
 supports 'fedora'
 supports 'debian'
+supports 'amazon'
 
 depends 'ohai'
 depends 'build-essential'
