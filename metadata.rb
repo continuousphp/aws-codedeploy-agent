@@ -1,21 +1,15 @@
+# frozen_string_literal: true
+
 name             'aws-codedeploy-agent'
-maintainer       'Oswald De Riemaecker'
-maintainer_email 'oswald@continuousphp.com'
+maintainer       'Continuous S.A'
+maintainer_email 'info@continuousphp.com'
 source_url       'https://github.com/continuousphp/aws-codedeploy-agent'
 issues_url       'https://github.com/continuousphp/aws-codedeploy-agent/issues'
 license          'Apache 2.0'
 description      'Installs/Configures aws-codedeploy-agent'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.7.1'
+chef_version '>= 12.1' if respond_to?(:chef_version)
+version '2.0.0'
 
-supports 'ubuntu'
-supports 'centos'
-supports 'fedora'
-supports 'debian'
-
-depends 'ohai'
+depends 'apt'
 depends 'build-essential'
-depends 'ruby_rbenv'
-depends 'ruby_build'
-depends 'cloudcli'
-depends 'ark', '= 3.1.0'

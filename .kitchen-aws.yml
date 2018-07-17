@@ -1,23 +1,22 @@
 ---
 driver:
   name: ec2
-  region: us-east-1
+  region: eu-west-1
   require_chef_omnibus: true
   associate_public_ip: true
-  aws_ssh_key_id: key-pairs
-  security_group_ids: ["sg-000000"]
+  aws_ssh_key_id: kitchen-ec2-wortimmo
+  security_group_ids: ["sg-2ee82c54"]
   interface: dns
 
 transport:
-  ssh_key: ~/.ssh/key-pairs.pem
+  ssh_key: ~/.ssh/kitchen-ec2-wortimmo.pem
   connection_timeout: 10
   connection_retries: 5
-  username: ubuntu
 
 platforms:
   - name: ubuntu-16.04-aws
     driver:
-      image_id: ami-2ef48339
+      image_id: ami-4d46d534
       instance_type: t2.micro
   - name: ubuntu-14.04-aws
     driver:
